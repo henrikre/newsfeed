@@ -23,6 +23,13 @@ function getArticles(req, res, next) {
       res.json({ error: "Oops. Something went wrong"});
       return
     }
+    articles = articles.map(article => {
+      var title = setMostVotedTitle(article);
+      if (title) {
+        article.title = title;
+      }
+      return article;
+    });
     res.json(articles);
   });
 }
